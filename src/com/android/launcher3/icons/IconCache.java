@@ -22,7 +22,6 @@ import static com.android.launcher3.util.Executors.MAIN_EXECUTOR;
 import static com.android.launcher3.util.Executors.MODEL_EXECUTOR;
 import static com.android.launcher3.util.LooperExecutor.CALLER_ICON_CACHE;
 import static com.android.launcher3.widget.WidgetSections.NO_CATEGORY;
-
 import static java.util.stream.Collectors.groupingBy;
 
 import android.content.ComponentName;
@@ -50,7 +49,6 @@ import androidx.core.util.Pair;
 
 import com.android.launcher3.Flags;
 import com.android.launcher3.InvariantDeviceProfile;
-import com.android.launcher3.LauncherFiles;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.dagger.ApplicationContext;
 import com.android.launcher3.dagger.LauncherAppSingleton;
@@ -114,20 +112,6 @@ public class IconCache extends BaseIconCache {
     private final SparseArray<BitmapInfo> mWidgetCategoryBitmapInfos;
 
     private int mPendingIconRequestCount = 0;
-
-    // Lawnchair: Apply 3p icon pack
-    public IconCache(Context context, InvariantDeviceProfile idp, LauncherIcons.IconPool iconPool, DaggerSingletonTracker lifecycle) {
-        this(
-            context,
-            idp,
-            LauncherFiles.APP_ICONS_DB,
-            UserCache.INSTANCE.get(context),
-            new LawnchairIconProvider(context),
-            InstallSessionHelper.INSTANCE.get(context),
-            iconPool,
-            lifecycle
-        );
-    }
     
     @Inject
     public IconCache(
@@ -135,9 +119,7 @@ public class IconCache extends BaseIconCache {
         InvariantDeviceProfile idp,
         @Nullable @Named("ICONS_DB") String dbFileName,
         UserCache userCache,
-        LauncherIconProvider iconProvider,
-        // TODO: Lawnchair stuff
-        //       IconProvider iconProvider,
+        LawnchairIconProvider iconProvider,
         InstallSessionHelper installSessionHelper,
         LauncherIcons.IconPool iconPool,
         DaggerSingletonTracker lifecycle) {
@@ -198,6 +180,7 @@ public class IconCache extends BaseIconCache {
         return mIconPool.obtain();
     }
 
+    /**
     /**
      * Updates the entries related to the given package in memory and persistent DB.
      */

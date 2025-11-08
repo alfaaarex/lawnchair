@@ -19,7 +19,6 @@ import static android.app.WallpaperManager.FLAG_SYSTEM;
 import static android.view.View.MeasureSpec.EXACTLY;
 import static android.view.View.MeasureSpec.makeMeasureSpec;
 import static android.view.View.VISIBLE;
-
 import static com.android.launcher3.BubbleTextView.DISPLAY_TASKBAR;
 import static com.android.launcher3.BubbleTextView.DISPLAY_WORKSPACE;
 import static com.android.launcher3.DeviceProfile.DEFAULT_SCALE;
@@ -33,7 +32,6 @@ import static com.android.launcher3.Utilities.ATLEAST_S;
 import static com.android.launcher3.Utilities.SHOULD_SHOW_FIRST_PAGE_WIDGET;
 import static com.android.launcher3.graphics.ThemeManager.PREF_ICON_SHAPE;
 import static com.android.launcher3.model.ModelUtils.currentScreenContentFilter;
-import static com.android.launcher3.util.ResourceBasedOverride.Overrides.getObject;
 import static com.android.launcher3.widget.LauncherWidgetHolder.APPWIDGET_HOST_ID;
 
 import android.app.Fragment;
@@ -47,8 +45,6 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -74,7 +70,6 @@ import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.Hotseat;
 import com.android.launcher3.InsettableFrameLayout;
 import com.android.launcher3.InvariantDeviceProfile;
-import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherPrefs;
 import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.ProxyPrefs;
@@ -108,11 +103,9 @@ import com.android.launcher3.model.data.LauncherAppWidgetInfo;
 import com.android.launcher3.model.data.WorkspaceItemInfo;
 import com.android.launcher3.util.BaseContext;
 import com.android.launcher3.util.ComponentKey;
-import com.android.launcher3.util.DaggerSingletonObject;
 import com.android.launcher3.util.DisplayController;
 import com.android.launcher3.util.IntArray;
 import com.android.launcher3.util.IntSet;
-import com.android.launcher3.util.MainThreadInitializedObject;
 import com.android.launcher3.util.SandboxContext;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.WindowBounds;
@@ -127,9 +120,6 @@ import com.android.launcher3.widget.LocalColorExtractor;
 import com.android.launcher3.widget.util.WidgetSizes;
 import com.android.systemui.shared.Flags;
 
-import dagger.BindsInstance;
-import dagger.Component;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
@@ -141,15 +131,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import app.lawnchair.DeviceProfileOverrides;
-import app.lawnchair.data.iconoverride.IconOverrideRepository;
-import app.lawnchair.font.FontCache;
-import app.lawnchair.font.FontManager;
-import app.lawnchair.icons.IconPackProvider;
-import app.lawnchair.preferences.PreferenceManager;
-import app.lawnchair.preferences2.PreferenceManager2;
-import app.lawnchair.smartspace.provider.SmartspaceProvider;
-import app.lawnchair.theme.ThemeProvider;
+import dagger.BindsInstance;
+import dagger.Component;
 
 /**
  * Utility class for generating the preview of Launcher for a given InvariantDeviceProfile.
